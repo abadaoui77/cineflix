@@ -1,0 +1,60 @@
+﻿
+
+<div
+  class="relative cursor-pointer group flex-shrink-0 w-36 md:w-44"
+  (click)="goToDetail()"
+  (mouseenter)="isHovered = true"
+  (mouseleave)="isHovered = false"
+>
+
+  
+  <div class="relative overflow-hidden rounded-md aspect-[2/3]">
+    <img
+      [src]="posterUrl"
+      [alt]="movie.title"
+      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+      loading="lazy"
+      onerror="this.src='https://via.placeholder.com/342x513/1a1a1a/666?text=No+Image'"
+    />
+
+    
+    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-2">
+
+      
+      <div class="flex justify-between items-start">
+        <span class="text-xs font-bold px-1.5 py-0.5 bg-black/70 rounded" [class]="getRatingColor()">
+          ⭐ {{ getFormattedRating() }}
+        </span>
+
+        
+        <button
+          (click)="toggleFavorite($event)"
+          class="w-7 h-7 rounded-full flex items-center justify-center transition-colors"
+          [class.bg-red-600]="isFavorite"
+          [class.bg-black]="!isFavorite"
+          [class.bg-opacity-70]="!isFavorite"
+        >
+          
+          <svg class="w-4 h-4 text-white" viewBox="0 0 24 24"
+            [attr.fill]="isFavorite ? 'currentColor' : 'none'"
+            stroke="currentColor" stroke-width="2">
+            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+        </button>
+      </div>
+
+      
+      <div>
+        <p class="text-white text-xs font-semibold leading-tight line-clamp-2">
+          {{ movie.title }}
+        </p>
+        <p class="text-gray-400 text-xs mt-0.5">{{ getReleaseYear() }}</p>
+      </div>
+    </div>
+  </div>
+
+  
+  <p class="mt-1.5 text-gray-300 text-xs font-medium line-clamp-1 group-hover:text-white transition-colors">
+    {{ movie.title }}
+  </p>
+</div>

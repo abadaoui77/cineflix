@@ -1,0 +1,125 @@
+﻿
+<div class="min-h-screen w-full overflow-x-hidden bg-gray-950 text-white">
+
+  
+  <app-navbar></app-navbar>
+
+  
+  <section
+    *ngIf="heroMovie"
+    class="relative w-full h-[430px] sm:h-[520px] md:h-[80vh] overflow-hidden"
+  >
+
+    
+    <img
+      [src]="heroImageUrl"
+      [alt]="heroMovie.title"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+
+    
+    <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent"></div>
+
+    
+    <div class="absolute bottom-0 left-0 w-full max-w-2xl p-4 sm:p-6 md:p-16">
+
+      
+      <h1 class="text-3xl sm:text-4xl md:text-6xl font-black mb-4 leading-tight">
+        {{ heroMovie.title }}
+      </h1>
+
+      
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-green-400 font-bold text-sm md:text-base">
+          ⭐ {{ heroMovie.vote_average.toFixed(1) }}/10
+        </span>
+
+        <span class="text-gray-300 text-sm md:text-base">
+          {{ heroMovie.release_date | date:'yyyy' }}
+        </span>
+      </div>
+
+      
+      <p class="text-gray-300 text-sm md:text-base leading-relaxed mb-6">
+        {{ getHeroOverview() }}
+      </p>
+
+      
+      <div class="flex flex-wrap gap-3">
+
+        
+        <button
+          (click)="goToMovieDetail()"
+          class="flex items-center gap-2 px-6 py-3 bg-white text-black font-bold rounded hover:bg-gray-200 transition-colors"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+
+          Voir le film
+        </button>
+
+        
+        <button
+          (click)="toggleHeroFavorite()"
+          class="flex items-center gap-2 px-6 py-3 font-bold rounded transition-colors border"
+          [class.bg-red-600]="heroIsFavorite"
+          [class.border-red-600]="heroIsFavorite"
+          [class.text-white]="heroIsFavorite"
+          [class.bg-white]="!heroIsFavorite"
+          [class.text-black]="!heroIsFavorite"
+          [class.border-white]="!heroIsFavorite"
+        >
+          <svg
+            class="w-5 h-5"
+            viewBox="0 0 24 24"
+            [attr.fill]="heroIsFavorite ? 'currentColor' : 'none'"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+
+          {{ heroIsFavorite ? 'Retiré des favoris' : 'Ajouter aux favoris' }}
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  
+  <div
+    *ngIf="!heroMovie"
+    class="w-full h-[430px] sm:h-[520px] md:h-[80vh] bg-gray-900 animate-pulse"
+  ></div>
+
+  
+  <div class="relative z-10 pb-16">
+
+    <app-movie-row
+      title="🔥 Tendances cette semaine"
+      [movies]="trendingMovies"
+      [isLoading]="isLoadingTrending"
+    ></app-movie-row>
+
+    <app-movie-row
+      title="🎬 Films populaires"
+      [movies]="popularMovies"
+      [isLoading]="isLoadingPopular"
+    ></app-movie-row>
+
+    <app-movie-row
+      title="⭐ Les mieux notés"
+      [movies]="topRatedMovies"
+      [isLoading]="isLoadingTopRated"
+    ></app-movie-row>
+
+    <app-movie-row
+      title="🎭 En ce moment au cinéma"
+      [movies]="nowPlayingMovies"
+      [isLoading]="isLoadingNowPlaying"
+    ></app-movie-row>
+
+  </div>
+</div>

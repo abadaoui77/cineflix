@@ -1,0 +1,35 @@
+﻿
+<section class="mb-8">
+
+  
+  <h2 class="text-white text-xl md:text-2xl font-bold mb-3 px-4 md:px-8">
+    {{ title }}
+  </h2>
+
+  
+  <div class="flex gap-3 overflow-x-auto px-4 md:px-8 pb-3 scrollbar-hide">
+
+    
+    
+    <ng-container *ngIf="isLoading">
+      
+      <div
+        *ngFor="let item of skeletonItems"
+        class="flex-shrink-0 w-36 md:w-44 rounded-md bg-gray-800 animate-pulse"
+        style="aspect-ratio: 2/3;"
+      ></div>
+    </ng-container>
+
+    
+    
+    <ng-container *ngIf="!isLoading">
+      
+      
+      <app-movie-card
+        *ngFor="let film of movies"
+        [movie]="film"
+      ></app-movie-card>
+    </ng-container>
+
+  </div>
+</section>

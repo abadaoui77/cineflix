@@ -1,0 +1,87 @@
+﻿
+<div class="min-h-screen bg-gray-950 text-white">
+
+  <app-navbar></app-navbar>
+
+  <div class="pt-24 px-4 md:px-8 pb-16 max-w-screen-xl mx-auto">
+
+    
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-black mb-2">
+        ❤️ Mes Favoris
+      </h1>
+      <p class="text-gray-400">
+        {{ favoriteMovies.length }} film(s) sauvegardé(s)
+      </p>
+    </div>
+
+    
+    <div *ngIf="favoriteMovies.length === 0" class="text-center py-24">
+      <div class="text-8xl mb-6">💔</div>
+      <h2 class="text-2xl font-bold mb-3">Aucun favori pour l'instant</h2>
+      <p class="text-gray-400 mb-6">
+        Parcours les films et ajoute ceux qui te plaisent !
+      </p>
+      <a
+        routerLink="/"
+        class="inline-block px-6 py-3 font-bold rounded-lg text-white transition-colors"
+        style="background-color: #e50914;"
+      >
+        Découvrir des films
+      </a>
+    </div>
+
+    
+    <div
+      *ngIf="favoriteMovies.length > 0"
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
+    >
+      
+      
+      <div
+        *ngFor="let movie of favoriteMovies"
+        class="relative cursor-pointer group"
+        (click)="goToDetail(movie.id)"
+      >
+
+        
+        <div class="relative overflow-hidden rounded-lg aspect-[2/3]">
+          <img
+            [src]="getPosterUrl(movie.poster_path)"
+            [alt]="movie.title"
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            onerror="this.src='https://via.placeholder.com/342x513/1a1a1a/666?text=No+Image'"
+          />
+
+          
+          <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-2">
+
+            
+            <span class="text-xs font-bold text-yellow-400 bg-black/70 px-1.5 py-0.5 rounded self-start">
+              ⭐ {{ movie.vote_average.toFixed(1) }}
+            </span>
+
+            
+            <button
+              (click)="removeFavorite(movie.id, $event)"
+              class="w-full py-1.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded transition-colors"
+            >
+              ✕ Retirer
+            </button>
+          </div>
+        </div>
+
+        
+        <div class="mt-2">
+          <p class="text-white text-xs font-semibold line-clamp-2 group-hover:text-red-400 transition-colors">
+            {{ movie.title }}
+          </p>
+          <p class="text-gray-500 text-xs mt-0.5">
+            {{ getReleaseYear(movie.release_date) }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
