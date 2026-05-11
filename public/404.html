@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CineFlix</title>
+    <script>
+      const path = window.location.pathname;
+      const search = window.location.search;
+      const hash = window.location.hash;
+      const redirect = path.split('/').slice(0, 2).join('/') +
+        '/?p=/' + path.slice(1).replace(/&/g, '~and~') +
+        (search ? '&q=' + search.slice(1).replace(/&/g, '~and~') : '') +
+        hash;
+      window.location.replace(redirect);
+    </script>
+  </head>
+  <body></body>
+</html>
