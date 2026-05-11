@@ -1,59 +1,119 @@
-# Cineflix
+# 🎬 CineFlix
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+Un clone Netflix 100% frontend développé avec Angular et l'API TMDB.
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-20-red?logo=angular)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-blue?logo=tailwindcss)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?logo=typescript)
+![TMDB](https://img.shields.io/badge/API-TMDB-green)
 
-To start a local development server, run:
+## ✨ Fonctionnalités
 
-```bash
-ng serve
+- 🏠 Page d'accueil avec hero banner et plusieurs catégories de films
+- 🔍 Recherche de films par titre
+- 🎬 Page de détail avec synopsis, note, trailer YouTube et films similaires
+- ❤️ Système de favoris sauvegardé en localStorage
+- 📱 Design responsive mobile / tablette / desktop
+
+## 🛠️ Stack technique
+
+| Technologie | Usage |
+|---|---|
+| Angular 20 | Framework principal |
+| TypeScript | Langage |
+| TailwindCSS 4 | Styles |
+| Angular Router | Navigation |
+| HttpClient | Appels API |
+| localStorage | Persistance des favoris |
+| TMDB API | Données films |
+| GitHub Actions | CI/CD |
+| GitHub Pages | Hébergement |
+
+## 📁 Structure du projet
+
+```
+src/app/
+├── core/
+│   ├── models/
+│   │   └── movie.model.ts
+│   ├── pipes/
+│   │   └── trust-url.pipe.ts
+│   └── services/
+│       ├── tmdb.service.ts
+│       └── favorites.service.ts
+├── shared/
+│   └── components/
+│       ├── navbar/
+│       ├── movie-card/
+│       └── movie-row/
+├── features/
+│   ├── home/
+│   ├── search/
+│   ├── movie-details/
+│   └── favorites/
+├── app.component.ts
+├── app.config.ts
+└── app.routes.ts
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🚀 Installation et lancement
 
-## Code scaffolding
+### Prérequis
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Node.js 20+
+- npm
+- Une clé API TMDB gratuite → [themoviedb.org](https://www.themoviedb.org/settings/api)
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Installation
 
 ```bash
-ng generate --help
+git clone https://github.com/abadaoui77/cineflix.git
+cd cineflix
+npm install
 ```
 
-## Building
+### Configuration
 
-To build the project run:
+Crée le fichier `src/environments/environment.ts` :
+
+```typescript
+export const environment = {
+  production: false,
+  tmdbApiKey: 'TA_CLE_API_TMDB'
+};
+```
+
+Crée le fichier `src/environments/environment.development.ts` :
+
+```typescript
+export const environment = {
+  production: false,
+  tmdbApiKey: 'TA_CLE_API_TMDB'
+};
+```
+
+### Lancement
 
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+L'application est disponible sur `http://localhost:4200`
 
-## Running unit tests
+## 📸 Pages
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+| Page | Description |
+|---|---|
+| `/` | Accueil avec hero banner et catégories |
+| `/search?q=...` | Résultats de recherche |
+| `/movie/:id` | Détail d'un film |
+| `/favorites` | Films sauvegardés |
+
+## ⚙️ Scripts disponibles
 
 ```bash
-ng test
+npm start        # Lance le serveur de développement
+npm run build    # Build de production
+npm test         # Lance les tests
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
